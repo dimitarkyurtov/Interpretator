@@ -1,0 +1,51 @@
+# depslib dependency file v1.0
+1574510131 source:c:\users\gamingpc\desktop\interpretator\interpretator\main.cpp
+	<iostream>
+	"include/Variables.h"
+	"include/Expression.h"
+	"include/Function.h"
+	"include/Functions.h"
+	<string>
+	<map>
+	<vector>
+
+1574509611 source:c:\users\gamingpc\desktop\interpretator\interpretator\src\variables.cpp
+	"../include/Variables.h"
+
+1573678488 c:\users\gamingpc\desktop\interpretator\interpretator\include\variables.h
+	<iostream>
+	<unordered_map>
+	<string>
+
+1573678488 source:c:\users\gamingpc\desktop\interpretator\interpretator\src\expression.cpp
+	"Expression.h"
+	<stack>
+
+1573678057 c:\users\gamingpc\desktop\interpretator\interpretator\include\expression.h
+	"BaseExpression.h"
+
+1573677604 c:\users\gamingpc\desktop\interpretator\interpretator\include\baseexpression.h
+	"Variables.h"
+	<string>
+
+1573677667 source:c:\users\gamingpc\desktop\interpretator\interpretator\src\baseexpression.cpp
+	"BaseExpression.h"
+
+1573681015 source:c:\users\gamingpc\desktop\interpretator\interpretator\src\function.cpp
+	"Function.h"
+
+1573681012 c:\users\gamingpc\desktop\interpretator\interpretator\include\function.h
+	"BaseExpression.h"
+	"Variables.h"
+	<vector>
+	<stack>
+	<map>
+
+1574510152 source:c:\users\gamingpc\desktop\interpretator\interpretator\src\functions.cpp
+	"Functions.h"
+
+1574510174 c:\users\gamingpc\desktop\interpretator\interpretator\include\functions.h
+	"Function.h"
+	<unordered_map>
+	<string>
+
