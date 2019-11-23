@@ -5,6 +5,8 @@
 #include <unordered_map>
 #include <string>
 
+class Function;
+
 class Functions
 {
     public:

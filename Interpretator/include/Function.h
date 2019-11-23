@@ -3,6 +3,7 @@
 
 #include "BaseExpression.h"
 #include "Variables.h"
+#include "Functions.h"
 #include<vector>
 #include<stack>
 #include<map>

@@ -1,6 +1,7 @@
 a = 1;
 c = 3;
-XD[x,y,z] = a + y*z + 2*b*x;
+XD[x] = a + 2*b*x;
+LMAO[x] = x + XD[2];
 print a;
 print b;
 print c;

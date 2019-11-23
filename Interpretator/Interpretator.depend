@@ -57,7 +57,7 @@
 	<fstream>
 	<iostream>
 
-1574528672 source:d:\interpretator\interpretator\main.cpp
+1574531122 source:d:\interpretator\interpretator\main.cpp
 	<iostream>
 	"include/Variables.h"
 	"include/Expression.h"
@@ -73,22 +73,24 @@
 	<unordered_map>
 	<string>
 
-1574521079 d:\interpretator\interpretator\include\expression.h
+1574529811 d:\interpretator\interpretator\include\expression.h
 	"BaseExpression.h"
+	"Functions.h"
 
 1574521128 d:\interpretator\interpretator\include\baseexpression.h
 	"Variables.h"
 	<string>
 	<vector>
 
-1574521151 d:\interpretator\interpretator\include\function.h
+1574530372 d:\interpretator\interpretator\include\function.h
 	"BaseExpression.h"
 	"Variables.h"
+	"Functions.h"
 	<vector>
 	<stack>
 	<map>
 
-1574510174 d:\interpretator\interpretator\include\functions.h
+1574530625 d:\interpretator\interpretator\include\functions.h
 	"Function.h"
 	<unordered_map>
 	<string>
@@ -104,17 +106,17 @@
 1573677667 source:d:\interpretator\interpretator\src\baseexpression.cpp
 	"BaseExpression.h"
 
-1574521104 source:d:\interpretator\interpretator\src\expression.cpp
+1574530959 source:d:\interpretator\interpretator\src\expression.cpp
 	"Expression.h"
 	<stack>
 
-1574528594 source:d:\interpretator\interpretator\src\function.cpp
+1574531395 source:d:\interpretator\interpretator\src\function.cpp
 	"Function.h"
 
 1574510152 source:d:\interpretator\interpretator\src\functions.cpp
 	"Functions.h"
 
-1574528826 source:d:\interpretator\interpretator\src\interpreter.cpp
+1574531454 source:d:\interpretator\interpretator\src\interpreter.cpp
 	"Interpreter.h"
 
 1574509611 source:d:\interpretator\interpretator\src\variables.cpp

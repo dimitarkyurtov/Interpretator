@@ -78,12 +78,54 @@ ulint Function::evaluate(const std::vector<ulint>& vals){
                 nums.push(vars[val]);
             }
              else{
-                std::cerr << "Error!";
+                std::cout << val << std::endl;
+                std::cerr << "Error!!!!";
                 return 0;
             }
 
             i--;
         }
+
+        else if(Functions::getInstance()->isCapitalCharacter(expr[i])){
+            std::string val;
+
+            while(i < size && Functions::getInstance()->isCapitalCharacter(expr[i])){
+
+                val += expr[i];
+                i++;
+            }
+            i++;
+            std::vector<ulint> vars;
+            while(expr[i] != ']'){
+                if(isNumber(expr[i])){
+                    ulint val = 0;
+
+                    while(i < size && isNumber(expr[i])){
+
+                        val = (val*10) + (expr[i]-'0');
+                        i++;
+                    }
+                    vars.push_back(val);
+                    i--;
+                }
+                i++;
+            }
+            i++;
+
+            if(Functions::getInstance()->isPresent(val)){
+                std::cout << Functions::getInstance()->at(val)->evaluate(vars) << std::endl;
+                nums.push(Functions::getInstance()->at(val)->evaluate(vars));
+            } else{
+                std::cerr << "Error!!!";
+                return 0;
+            }
+
+            i--;
+            std::cout << expr[i] << std::endl;
+            i++;
+        }
+
+
 
         else if(expr[i] == ')'){
             while(!ops.empty() && ops.top() != '('){

@@ -21,12 +21,13 @@ int main()
     Functions* funcTable = Functions::getInstance();
     ifstream myfile ("program.txt");
     interpreter->interpret(myfile, cout);
-    std::vector<ulint> v;
+    std::vector<ulint> v;;
     v.push_back(1);
-    v.push_back(2);
-    v.push_back(3);
     table->persist("a", 3);
     table->persist("b", 2);
-    cout << funcTable->at("XD")->evaluate(v);
+    cout << funcTable->at("XD")->evaluate(v) << endl;
+    std::vector<ulint> v2;
+    Expression e = Expression("LMAO[3]");
+    cout << e.evaluate(v2);
     return 0;
 }

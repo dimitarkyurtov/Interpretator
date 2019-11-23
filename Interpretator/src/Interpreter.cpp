@@ -38,6 +38,7 @@ void Interpreter::interpret(std::ifstream& file, std::ostream& stream = std::cou
         row ++;
         col = 0;
         command = "";
+        param="";
         while(line[col] != '=' && line[col] != ' '){
             command += line[col];
             col ++;

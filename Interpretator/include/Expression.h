@@ -2,6 +2,7 @@
 #define EXPRESSION_H
 
 #include"BaseExpression.h"
+#include"Functions.h"
 
 class Expression : public BaseExpression
 {
