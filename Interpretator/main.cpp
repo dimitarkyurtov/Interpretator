@@ -20,14 +20,20 @@ int main()
     Variables* table = Variables::getInstance();
     Functions* funcTable = Functions::getInstance();
     ifstream myfile ("program.txt");
-    interpreter->interpret(myfile, cout);
-    std::vector<ulint> v;;
+    /*std::vector<ulint> v;
     v.push_back(1);
     table->persist("a", 3);
     table->persist("b", 2);
-    cout << funcTable->at("XD")->evaluate(v) << endl;
+    table->persist("c", 4);
+    /*
+    std::vector<std::string> v2;
+    v2.push_back("x");
+    Function f = Function("2*3*x", v2);
+    cout << f.call(v);
+    cout << funcTable->at("XD")->call(v) << endl;
     std::vector<ulint> v2;
-    Expression e = Expression("LMAO[3]");
-    cout << e.evaluate(v2);
+    Expression e = Expression("LMAO[3,1]");
+    cout << e.evaluate();*/
+    interpreter->interpret(myfile, cout);
     return 0;
 }

@@ -18,7 +18,7 @@ const std::string Expression::isValid(const std::string& expr){
     return err;
 }
 
-ulint Expression::evaluate(const std::vector<ulint>& vals){
+ulint Expression::evaluate(){
     std::stack<char> ops;
     std::stack<ulint> nums;
     unsigned i;
@@ -55,7 +55,7 @@ ulint Expression::evaluate(const std::vector<ulint>& vals){
             if(Variables::getInstance()->isPresent(val)){
                 nums.push(Variables::getInstance()->params[val]);
             } else{
-                std::cerr << "Error!!";
+                    std::cerr << "No variable called " << val << " defined yet" << std::endl;
                 return 0;
             }
 
@@ -71,7 +71,20 @@ ulint Expression::evaluate(const std::vector<ulint>& vals){
             }
             i++;
             std::vector<ulint> vars;
+            std::string word;
             while(expr[i] != ']'){
+                word = "";
+                if(Variables::getInstance()->isCharacter(expr[i])){
+                    while(Variables::getInstance()->isCharacter(expr[i])){
+                        word += expr[i];
+                        i++;
+                    }
+                    if(Variables::getInstance()->isPresent(word)){
+                        vars.push_back(Variables::getInstance()->at(word));
+                    } else {
+                        std::cerr << "No variable called " << word << " defined yet" << std::endl;
+                    }
+                }
                 if(isNumber(expr[i])){
                     ulint val = 0;
 
@@ -83,14 +96,16 @@ ulint Expression::evaluate(const std::vector<ulint>& vals){
                     vars.push_back(val);
                     i--;
                 }
-                i++;
+                if(expr[i] != ']'){
+                   i++;
+                }
             }
             i++;
 
             if(Functions::getInstance()->isPresent(val)){
-                nums.push(Functions::getInstance()->at(val)->evaluate(vars));
+                nums.push(Functions::getInstance()->at(val)->call(vars));
             } else{
-                std::cerr << "Error!!!";
+                std::cerr << "No function called " << val << " defined yet" << std::endl;
                 return 0;
             }
 

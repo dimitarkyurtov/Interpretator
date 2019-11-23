@@ -24,6 +24,11 @@ void Interpreter::defineFunction(const std::string& funcName, const std::string&
     funcsPtr->persist(funcName, f);
 }
 
+void Interpreter::print(const std::string& expr, std::ostream& stream = std::cout){
+    Expression* e = new Expression(expr);
+    stream << e->evaluate() << std::endl;
+}
+
 void Interpreter::interpret(std::ifstream& file, std::ostream& stream = std::cout){
     std::string line;
     std::string command;
@@ -43,7 +48,6 @@ void Interpreter::interpret(std::ifstream& file, std::ostream& stream = std::cou
             command += line[col];
             col ++;
         }
-        std::cout << line << std::endl;
 
         if(command.compare("read") == 0){
             while(line[col] == ' '){
@@ -59,8 +63,19 @@ void Interpreter::interpret(std::ifstream& file, std::ostream& stream = std::cou
                 std::cerr << "wrong syntax at " << row << " " << col+1 << "!" << std::endl;
             }
             this->persistParam(param);
-        } else if(command.find('[') <= command.size()){
-            std::cout << command << std::endl;
+        } else if(command.compare("print") == 0){
+            while(line[col] != ';'){
+                    while(line[col] == ' '){
+                        col++;
+                    }
+                if(line[col] != ';'){
+                    param += line[col];
+                    col++;
+                }
+            }
+            this->print(param, stream);
+        }
+        else if(command.find('[') <= command.size()){
             while(line[col] == ' '){
                 col++;
             }
@@ -81,9 +96,7 @@ void Interpreter::interpret(std::ifstream& file, std::ostream& stream = std::cou
                     col++;
                 }
             }
-            std::cout << param << std::endl;
             funcName = command.substr(0, command.find('['));
-            std::cout << funcName << std::endl;
             params = command.substr(command.find('['));
             j = 1;
             std::string word;
@@ -94,13 +107,28 @@ void Interpreter::interpret(std::ifstream& file, std::ostream& stream = std::cou
                     word += params[j];
                     j++;
                 }
-                std::cout << word << std::endl;
                 vars.push_back(word);
                 if(params[j] != ']'){
                     j++;
                 }
             }
             this->defineFunction(funcName, param, vars);
+        } else{
+            while(line[col] == ' '){
+                        col++;
+            }
+            col++;
+            while(line[col] != ';'){
+                    while(line[col] == ' '){
+                        col++;
+                    }
+                if(line[col] != ';'){
+                    param += line[col];
+                    col++;
+                }
+            }
+            Expression e = Expression(param);
+            paramsPtr->persist(command, e.evaluate());
         }
     }
 }

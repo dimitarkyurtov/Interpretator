@@ -17,6 +17,7 @@ class Interpreter
     private:
         void defineFunction(const std::string&, const std::string&, const std::vector<std::string>&);
         void persistParam(const std::string&);
+        void print(const std::string&, std::ostream&);
         Variables* paramsPtr;
         Functions* funcsPtr;
         static Interpreter* instance;

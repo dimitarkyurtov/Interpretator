@@ -1,8 +1,10 @@
-a = 1;
-c = 3;
+a = 3+1;
+b = 2+3;
 XD[x] = a + 2*b*x;
-LMAO[x] = x + XD[2];
+LMAO[x,y] = x + y + XD[2];
+c = XD[a];
+print d;
 print a;
 print b;
-print c;
-print D[c];
+print b + 3 +  XD[2]  ;
+print XD[a];

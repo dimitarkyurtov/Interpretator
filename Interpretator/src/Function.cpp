@@ -22,23 +22,14 @@ ulint Function::call(const std::vector<ulint>& vals){
             vars[x.first] = vals[i];
             i++;
         }
+        return evaluate();
     } else {
-        std::cerr << "Error!!!" << std::endl;
+            std::cerr << "Not enough arguments provided\n expected: " << paramsCount << "\n provided: " << vals.size() << std::endl;
         return 0;
     }
 }
 
-ulint Function::evaluate(const std::vector<ulint>& vals){
-    if(paramsCount == vals.size()){
-        unsigned i = 0;
-        for(auto x : vars){
-            vars[x.first] = vals[i];
-            i++;
-        }
-    } else {
-        std::cerr << "Error!!" << std::endl;
-        return 0;
-    }
+ulint Function::evaluate(){
     std::stack<char> ops;
     std::stack<ulint> nums;
     unsigned i;
@@ -78,8 +69,7 @@ ulint Function::evaluate(const std::vector<ulint>& vals){
                 nums.push(vars[val]);
             }
              else{
-                std::cout << val << std::endl;
-                std::cerr << "Error!!!!";
+                    std::cerr << "No variable called " << val << " defined yet" << std::endl;
                 return 0;
             }
 
@@ -113,15 +103,13 @@ ulint Function::evaluate(const std::vector<ulint>& vals){
             i++;
 
             if(Functions::getInstance()->isPresent(val)){
-                std::cout << Functions::getInstance()->at(val)->evaluate(vars) << std::endl;
-                nums.push(Functions::getInstance()->at(val)->evaluate(vars));
+                nums.push(Functions::getInstance()->at(val)->call(vars));
             } else{
-                std::cerr << "Error!!!";
+                std::cerr << "No function called " << val << " defined yet" << std::endl;
                 return 0;
             }
 
             i--;
-            std::cout << expr[i] << std::endl;
             i++;
         }
 
