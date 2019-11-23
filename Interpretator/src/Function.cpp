@@ -22,14 +22,23 @@ ulint Function::call(const std::vector<ulint>& vals){
             vars[x.first] = vals[i];
             i++;
         }
-        return evaluate();
     } else {
-        std::cerr << "Error!" << std::endl;
+        std::cerr << "Error!!!" << std::endl;
         return 0;
     }
 }
 
-ulint Function::evaluate(){
+ulint Function::evaluate(const std::vector<ulint>& vals){
+    if(paramsCount == vals.size()){
+        unsigned i = 0;
+        for(auto x : vars){
+            vars[x.first] = vals[i];
+            i++;
+        }
+    } else {
+        std::cerr << "Error!!" << std::endl;
+        return 0;
+    }
     std::stack<char> ops;
     std::stack<ulint> nums;
     unsigned i;

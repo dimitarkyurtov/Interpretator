@@ -3,11 +3,12 @@
 
 #include "Variables.h"
 #include<string>
+#include<vector>
 
 class BaseExpression
 {
     public:
-        virtual ulint evaluate() = 0;
+        virtual ulint evaluate(const std::vector<ulint>& vals) = 0;
 
     protected:
         std::string expr;

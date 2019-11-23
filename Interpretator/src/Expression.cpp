@@ -18,7 +18,7 @@ const std::string Expression::isValid(const std::string& expr){
     return err;
 }
 
-ulint Expression::evaluate(){
+ulint Expression::evaluate(const std::vector<ulint>& vals){
     std::stack<char> ops;
     std::stack<ulint> nums;
     unsigned i;

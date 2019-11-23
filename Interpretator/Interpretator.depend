@@ -1,10 +1,11 @@
 # depslib dependency file v1.0
-1574510131 source:c:\users\gamingpc\desktop\interpretator\interpretator\main.cpp
+1574518872 source:c:\users\gamingpc\desktop\interpretator\interpretator\main.cpp
 	<iostream>
 	"include/Variables.h"
 	"include/Expression.h"
 	"include/Function.h"
 	"include/Functions.h"
+	"include/Interpreter.h"
 	<string>
 	<map>
 	<vector>
@@ -48,4 +49,74 @@
 	"Function.h"
 	<unordered_map>
 	<string>
+
+1574519955 c:\users\gamingpc\desktop\interpretator\interpretator\include\interpreter.h
+	"Variables.h"
+	"Functions.h"
+	<string>
+	<fstream>
+	<iostream>
+
+1574528672 source:d:\interpretator\interpretator\main.cpp
+	<iostream>
+	"include/Variables.h"
+	"include/Expression.h"
+	"include/Function.h"
+	"include/Functions.h"
+	"include/Interpreter.h"
+	<string>
+	<map>
+	<vector>
+
+1573678488 d:\interpretator\interpretator\include\variables.h
+	<iostream>
+	<unordered_map>
+	<string>
+
+1574521079 d:\interpretator\interpretator\include\expression.h
+	"BaseExpression.h"
+
+1574521128 d:\interpretator\interpretator\include\baseexpression.h
+	"Variables.h"
+	<string>
+	<vector>
+
+1574521151 d:\interpretator\interpretator\include\function.h
+	"BaseExpression.h"
+	"Variables.h"
+	<vector>
+	<stack>
+	<map>
+
+1574510174 d:\interpretator\interpretator\include\functions.h
+	"Function.h"
+	<unordered_map>
+	<string>
+
+1574528122 d:\interpretator\interpretator\include\interpreter.h
+	"Variables.h"
+	"Functions.h"
+	"Expression.h"
+	<string>
+	<fstream>
+	<iostream>
+
+1573677667 source:d:\interpretator\interpretator\src\baseexpression.cpp
+	"BaseExpression.h"
+
+1574521104 source:d:\interpretator\interpretator\src\expression.cpp
+	"Expression.h"
+	<stack>
+
+1574528594 source:d:\interpretator\interpretator\src\function.cpp
+	"Function.h"
+
+1574510152 source:d:\interpretator\interpretator\src\functions.cpp
+	"Functions.h"
+
+1574528826 source:d:\interpretator\interpretator\src\interpreter.cpp
+	"Interpreter.h"
+
+1574509611 source:d:\interpretator\interpretator\src\variables.cpp
+	"../include/Variables.h"
 

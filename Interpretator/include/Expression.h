@@ -8,7 +8,7 @@ class Expression : public BaseExpression
     public:
         Expression();
         Expression(const std::string&);
-        ulint evaluate();
+        ulint evaluate(const std::vector<ulint>& vals);
 
     protected:
         const std::string isValid(const std::string&);

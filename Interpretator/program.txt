@@ -1,0 +1,7 @@
+a = 1;
+c = 3;
+XD[x,y,z] = a + y*z + 2*b*x;
+print a;
+print b;
+print c;
+print D[c];

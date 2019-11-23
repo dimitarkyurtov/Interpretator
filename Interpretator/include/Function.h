@@ -11,7 +11,7 @@ class Function : BaseExpression
 {
     public:
         Function(const std::string&, const std::vector<std::string>&);
-        ulint evaluate();
+        ulint evaluate(const std::vector<ulint>& vals);
         ulint call(const std::vector<ulint>&);
 
     protected:
