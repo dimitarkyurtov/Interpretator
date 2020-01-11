@@ -1,10 +1,43 @@
-a = 3+1;
-b = 2+3;
-XD[x] = a + 2*b*x;
-LMAO[x,y] = x + y + XD[2];
-c = XD[a];
-print d;
+a  = 3;
+if (a ? 3){
+  print 1;
+  print 1;
+  print 1;
+  a = 5;
+}
+else {
+  print 2;
+  print 2;
+  print 2;
+}
+if (2 > 1) {
+ print 8;
+}
+else {
+ print 7;
+}
+if (2 > 1) {
+ print 8;
+}
+else {
+ print 7;
+}
+if (2 > 1) {
+ print 8;
+}
+else {
+ print 7;
+}
+if (2 > 1) {
+ print 8;
+}
+else {
+ print 7;
+}
+if (2 > 1) {
+ print 8;
+}
+else {
+ print 7;
+}
 print a;
-print b;
-print b + 3 +  XD[2]  ;
-print XD[a];

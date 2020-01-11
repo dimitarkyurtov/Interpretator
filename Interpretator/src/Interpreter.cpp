@@ -22,11 +22,12 @@ void Interpreter::persistParam(const std::string& param){
 void Interpreter::defineFunction(const std::string& funcName, const std::string& expr, const std::vector<std::string>& vars){
     Function* f = new Function(expr, vars);
     funcsPtr->persist(funcName, f);
+    delete f;
 }
 
 void Interpreter::print(const std::string& expr, std::ostream& stream = std::cout){
-    Expression* e = new Expression(expr);
-    stream << e->evaluate() << std::endl;
+    Expression e = Expression(expr);
+    stream << e.evaluate() << std::endl;
 }
 
 void Interpreter::interpret(std::ifstream& file, std::ostream& stream = std::cout){
@@ -38,18 +39,94 @@ void Interpreter::interpret(std::ifstream& file, std::ostream& stream = std::cou
     unsigned j;
     unsigned row = 0;
     unsigned col;
+    bool ifFlag = true;
+    bool elseFlag = false;
     while(std::getline (file,line)) {
         // Output the text from the file
         row ++;
         col = 0;
+        while(line[col] == ' '){
+            col ++;
+        }
+        if(line[col] == '}' && elseFlag == true){
+            elseFlag = false;
+            row ++;
+            std::getline (file,line);
+            col = 0;
+        }
+
+        if(line[col] == '}' && ifFlag == true){
+            ifFlag = false;
+            row ++;
+            std::getline (file,line);
+            col = 0;
+        }
         command = "";
         param="";
         while(line[col] != '=' && line[col] != ' '){
             command += line[col];
             col ++;
         }
-
-        if(command.compare("read") == 0){
+        if (command.compare("if") == 0){
+            while(line[col] == ' '){
+                col++;
+            }
+            if(line[col] != '('){
+                std::cerr << "wrong syntax at " << row << " " << col+1 << ", expected ( !" << std::endl;
+            }
+            col ++;
+            while(line[col] != ')'){
+                while(line[col] == ' '){
+                    col++;
+                }
+                param += line[col];
+                col++;
+            }
+            col ++;
+            while(line[col] == ' '){
+                col++;
+            }
+            if(line[col] != '{'){
+                std::cerr << "wrong syntax at " << row << " " << col+1 << ", expected { !" << std::endl;
+            }
+            Expression e = Expression(param);
+            if(e.evaluate() == 0){
+                while(line[col] != '}'){
+                        std::getline (file,line);
+                        row ++;
+                        col = 0;
+                        while(line[col] == ' '){
+                            col++;
+                        }
+                    }
+                    elseFlag = true;
+                    ifFlag = false;
+                }
+            else {
+                elseFlag = false;
+                ifFlag = true;
+            }
+        }
+        else if(command.compare("else") == 0){
+            while(line[col] == ' '){
+                col++;
+            }
+            if(line[col] != '{'){
+                std::cerr << "wrong syntax at " << row << " " << col+1 << "!" << std::endl;
+            }
+            if(elseFlag == false){
+                col = 0;
+                while(line[col] != '}'){
+                    std::getline (file,line);
+                    row ++;
+                    col = 0;
+                    while(line[col] == ' '){
+                        col++;
+                    }
+                }
+            }
+        }
+        else if(command.compare("read") == 0){
             while(line[col] == ' '){
                 col++;
             }

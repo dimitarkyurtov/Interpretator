@@ -37,11 +37,15 @@
 		<Unit filename="include/BaseExpression.h" />
 		<Unit filename="include/Expression.h" />
 		<Unit filename="include/Function.h" />
+		<Unit filename="include/Functions.h" />
+		<Unit filename="include/Interpreter.h" />
 		<Unit filename="include/Variables.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/BaseExpression.cpp" />
 		<Unit filename="src/Expression.cpp" />
 		<Unit filename="src/Function.cpp" />
+		<Unit filename="src/Functions.cpp" />
+		<Unit filename="src/Interpreter.cpp" />
 		<Unit filename="src/Variables.cpp" />
 		<Extensions>
 			<code_completion />

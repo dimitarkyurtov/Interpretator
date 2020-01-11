@@ -57,7 +57,7 @@
 	<fstream>
 	<iostream>
 
-1574538545 source:d:\interpretator\interpretator\main.cpp
+1578764244 source:d:\interpretator\interpretator\main.cpp
 	<iostream>
 	"include/Variables.h"
 	"include/Expression.h"
@@ -103,7 +103,7 @@
 	<fstream>
 	<iostream>
 
-1573677667 source:d:\interpretator\interpretator\src\baseexpression.cpp
+1578754988 source:d:\interpretator\interpretator\src\baseexpression.cpp
 	"BaseExpression.h"
 
 1574539217 source:d:\interpretator\interpretator\src\expression.cpp
@@ -116,7 +116,7 @@
 1574510152 source:d:\interpretator\interpretator\src\functions.cpp
 	"Functions.h"
 
-1574539252 source:d:\interpretator\interpretator\src\interpreter.cpp
+1578767293 source:d:\interpretator\interpretator\src\interpreter.cpp
 	"Interpreter.h"
 
 1574509611 source:d:\interpretator\interpretator\src\variables.cpp
