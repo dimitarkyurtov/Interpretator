@@ -1,41 +1,8 @@
 a=3;
 b = 0;
 if(1)<
- print(1337);
->
-else{
- print(1332);
-}
- while(b < 2)[
- b = b + 1;
 if(1)<
- print(1337);
+print(3);
 >
-else{
- print(1332);
-}
- print(b);
-]
-if(1)<
- print(1337);
 >
-else{
- print(1332);
-}
-while(a < 11)[
- a = a + 1;
-if(1)<
- print(1337);
->
-else{
- print(1332);
-}
- print(a);
-]  
-if(1)<
- print(1337);
->
-else{
- print(1332);
-}
 print (a+3);
