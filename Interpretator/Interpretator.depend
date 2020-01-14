@@ -95,7 +95,7 @@
 	<unordered_map>
 	<string>
 
-1574534918 d:\interpretator\interpretator\include\interpreter.h
+1579016246 d:\interpretator\interpretator\include\interpreter.h
 	"Variables.h"
 	"Functions.h"
 	"Expression.h"
@@ -110,13 +110,13 @@
 	"Expression.h"
 	<stack>
 
-1574539139 source:d:\interpretator\interpretator\src\function.cpp
+1579016246 source:d:\interpretator\interpretator\src\function.cpp
 	"Function.h"
 
 1574510152 source:d:\interpretator\interpretator\src\functions.cpp
 	"Functions.h"
 
-1578767293 source:d:\interpretator\interpretator\src\interpreter.cpp
+1579024360 source:d:\interpretator\interpretator\src\interpreter.cpp
 	"Interpreter.h"
 
 1574509611 source:d:\interpretator\interpretator\src\variables.cpp

@@ -39,14 +39,27 @@ void Interpreter::interpret(std::ifstream& file, std::ostream& stream = std::cou
     unsigned j;
     unsigned row = 0;
     unsigned col;
+    unsigned pos = 0;
+    unsigned counter = 0;
     bool ifFlag = true;
     bool elseFlag = false;
+    bool whileFlag = false;
     while(std::getline (file,line)) {
         // Output the text from the file
         row ++;
         col = 0;
+        counter = 0;
         while(line[col] == ' '){
             col ++;
+            counter ++;
+        }
+        if(line[col] == '}' && whileFlag == true){
+            whileFlag = false;
+            row ++;
+            file.seekg(pos, file.beg);
+            std::getline (file,line);
+            std::cout << pos << std::endl;
+            col = 0;
         }
         if(line[col] == '}' && elseFlag == true){
             elseFlag = false;
@@ -61,6 +74,7 @@ void Interpreter::interpret(std::ifstream& file, std::ostream& stream = std::cou
             std::getline (file,line);
             col = 0;
         }
+        std::cout << line << std::endl;
         command = "";
         param="";
         while(line[col] != '=' && line[col] != ' '){
@@ -125,6 +139,46 @@ void Interpreter::interpret(std::ifstream& file, std::ostream& stream = std::cou
                     }
                 }
             }
+        }
+        else if(command.compare("while") == 0){
+            while(line[col] == ' '){
+                col++;
+            }
+            file.clear();
+            pos = file.tellg() - line.size()- 6;
+            std::cout << line.size() << std::endl;
+                if(line[col] != '('){
+                    std::cerr << "wrong syntax at " << row << " " << col+1 << ", expected ( !" << std::endl;
+                }
+                col ++;
+                while(line[col] != ')'){
+                    while(line[col] == ' '){
+                        col++;
+                    }
+                    param += line[col];
+                    col++;
+                }
+                col ++;
+                while(line[col] == ' '){
+                    col++;
+                }
+                if(line[col] != '{'){
+                    std::cerr << "wrong syntax at " << row << " " << col+1 << ", expected { !" << std::endl;
+                }
+                Expression e = Expression(param);
+                if(e.evaluate() == 0){
+                    while(line[col] != '}'){
+                            std::getline (file,line);
+                            row ++;
+                            col = 0;
+                            while(line[col] == ' '){
+                                col++;
+                            }
+                        }
+                    }
+                else {
+                    whileFlag = true;
+                }
         }
         else if(command.compare("read") == 0){
             while(line[col] == ' '){
@@ -208,4 +262,5 @@ void Interpreter::interpret(std::ifstream& file, std::ostream& stream = std::cou
             paramsPtr->persist(command, e.evaluate());
         }
     }
+    file.close();
 }
