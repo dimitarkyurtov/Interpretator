@@ -41,10 +41,22 @@ void Interpreter::interpret(std::ifstream& file, std::ostream& stream = std::cou
     unsigned col;
     unsigned pos = 0;
     unsigned counter = 0;
-    bool ifFlag = true;
-    bool elseFlag = false;
-    bool whileFlag = false;
+    unsigned sizze = 0;
+    unsigned tellg = 0;
+    unsigned rows = 0;
+    unsigned ifFlag = 1;
+    unsigned elseFlag = 0;
+    unsigned whileFlag = 0;
     while(std::getline (file,line)) {
+        rows ++;
+    }
+    file.clear();
+    file.seekg(0, file.beg);
+    while(std::getline (file,line)) {
+        sizze = line.size();
+        std::cout << line << std::endl;
+
+        line.erase(std::remove(line.begin(), line.end(), ' '), line.end());
         // Output the text from the file
         row ++;
         col = 0;
@@ -53,31 +65,45 @@ void Interpreter::interpret(std::ifstream& file, std::ostream& stream = std::cou
             col ++;
             counter ++;
         }
-        if(line[col] == '}' && whileFlag == true){
+        if(line[col] == ']' && whileFlag == true){
             whileFlag = false;
             row ++;
+            file.clear();
             file.seekg(pos, file.beg);
-            std::getline (file,line);
-            std::cout << pos << std::endl;
+            std::getline(file,line);
+        std::cout << line << std::endl;
+            sizze = line.size();
+            line.erase(std::remove(line.begin(), line.end(), ' '), line.end());
             col = 0;
         }
         if(line[col] == '}' && elseFlag == true){
             elseFlag = false;
             row ++;
+            if(whileFlag == false){
+                tellg += sizze +2;
+            }
             std::getline (file,line);
+        std::cout << line << std::endl;
+            sizze = line.size();
+            line.erase(std::remove(line.begin(), line.end(), ' '), line.end());
             col = 0;
         }
 
-        if(line[col] == '}' && ifFlag == true){
+        if(line[col] == '>' && ifFlag == true){
             ifFlag = false;
             row ++;
+            if(whileFlag == false){
+                tellg += sizze +2;
+            }
             std::getline (file,line);
+            sizze = line.size();
+        std::cout << line << std::endl;
+            line.erase(std::remove(line.begin(), line.end(), ' '), line.end());
             col = 0;
         }
-        std::cout << line << std::endl;
         command = "";
         param="";
-        while(line[col] != '=' && line[col] != ' '){
+        while(line[col] != '=' && line[col] != '('&& line[col] != '<'&& line[col] != '{'){
             command += line[col];
             col ++;
         }
@@ -100,19 +126,30 @@ void Interpreter::interpret(std::ifstream& file, std::ostream& stream = std::cou
             while(line[col] == ' '){
                 col++;
             }
-            if(line[col] != '{'){
+            if(line[col] != '<'){
                 std::cerr << "wrong syntax at " << row << " " << col+1 << ", expected { !" << std::endl;
             }
             Expression e = Expression(param);
             if(e.evaluate() == 0){
-                while(line[col] != '}'){
+                     if(whileFlag == false){
+                            tellg += sizze +2;
+                        }
+                while(line[col] != '>'){
                         std::getline (file,line);
+                        if(whileFlag == false){
+                            sizze = line.size();
+                            tellg += sizze +2;
+                        }
+
                         row ++;
                         col = 0;
                         while(line[col] == ' '){
                             col++;
                         }
                     }
+                    if(whileFlag == false){
+                            tellg -= sizze +2;
+                        }
                     elseFlag = true;
                     ifFlag = false;
                 }
@@ -130,14 +167,24 @@ void Interpreter::interpret(std::ifstream& file, std::ostream& stream = std::cou
             }
             if(elseFlag == false){
                 col = 0;
+                if(whileFlag == false){
+                            tellg += sizze +2;
+                        }
                 while(line[col] != '}'){
                     std::getline (file,line);
+                    if(whileFlag == false){
+                            sizze = line.size();
+                            tellg += sizze +2;
+                        }
                     row ++;
                     col = 0;
                     while(line[col] == ' '){
                         col++;
                     }
                 }
+                if(whileFlag == false){
+                            tellg -= sizze +2;
+                        }
             }
         }
         else if(command.compare("while") == 0){
@@ -145,8 +192,8 @@ void Interpreter::interpret(std::ifstream& file, std::ostream& stream = std::cou
                 col++;
             }
             file.clear();
-            pos = file.tellg() - line.size()- 6;
-            std::cout << line.size() << std::endl;
+            pos = tellg;
+            std::cout <<"Pos: " << pos << std::endl;
                 if(line[col] != '('){
                     std::cerr << "wrong syntax at " << row << " " << col+1 << ", expected ( !" << std::endl;
                 }
@@ -162,19 +209,23 @@ void Interpreter::interpret(std::ifstream& file, std::ostream& stream = std::cou
                 while(line[col] == ' '){
                     col++;
                 }
-                if(line[col] != '{'){
+                if(line[col] != '['){
                     std::cerr << "wrong syntax at " << row << " " << col+1 << ", expected { !" << std::endl;
                 }
                 Expression e = Expression(param);
                 if(e.evaluate() == 0){
-                    while(line[col] != '}'){
+                    tellg += sizze +2;
+                    while(line[col] != ']'){
                             std::getline (file,line);
+                            sizze = line.size();
+                            tellg += sizze +2;
                             row ++;
                             col = 0;
                             while(line[col] == ' '){
                                 col++;
                             }
                         }
+                    tellg -= sizze + 2;
                     }
                 else {
                     whileFlag = true;
@@ -195,11 +246,12 @@ void Interpreter::interpret(std::ifstream& file, std::ostream& stream = std::cou
             }
             this->persistParam(param);
         } else if(command.compare("print") == 0){
-            while(line[col] != ';'){
+            col ++;
+            while(line[col] != ')'){
                     while(line[col] == ' '){
                         col++;
                     }
-                if(line[col] != ';'){
+                if(line[col] != ')'){
                     param += line[col];
                     col++;
                 }
@@ -260,6 +312,9 @@ void Interpreter::interpret(std::ifstream& file, std::ostream& stream = std::cou
             }
             Expression e = Expression(param);
             paramsPtr->persist(command, e.evaluate());
+        }
+        if(whileFlag == false){
+            tellg += sizze + 2;
         }
     }
     file.close();
