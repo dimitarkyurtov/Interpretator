@@ -68,21 +68,22 @@
 	<map>
 	<vector>
 
-1573678488 d:\interpretator\interpretator\include\variables.h
+1579127270 d:\interpretator\interpretator\include\variables.h
+	"BigInt.cpp"
 	<iostream>
 	<unordered_map>
 	<string>
 
-1574535320 d:\interpretator\interpretator\include\expression.h
+1579126806 d:\interpretator\interpretator\include\expression.h
 	"BaseExpression.h"
 	"Functions.h"
 
-1574535302 d:\interpretator\interpretator\include\baseexpression.h
+1579127303 d:\interpretator\interpretator\include\baseexpression.h
 	"Variables.h"
 	<string>
 	<vector>
 
-1574535550 d:\interpretator\interpretator\include\function.h
+1579127021 d:\interpretator\interpretator\include\function.h
 	"BaseExpression.h"
 	"Variables.h"
 	"Functions.h"
@@ -105,22 +106,37 @@
 	<algorithm>
 	<map>
 
-1578754988 source:d:\interpretator\interpretator\src\baseexpression.cpp
+1579126782 source:d:\interpretator\interpretator\src\baseexpression.cpp
 	"BaseExpression.h"
 
-1574539217 source:d:\interpretator\interpretator\src\expression.cpp
+1579127841 source:d:\interpretator\interpretator\src\expression.cpp
 	"Expression.h"
 	<stack>
 
-1579016246 source:d:\interpretator\interpretator\src\function.cpp
+1579127247 source:d:\interpretator\interpretator\src\function.cpp
 	"Function.h"
 
 1574510152 source:d:\interpretator\interpretator\src\functions.cpp
 	"Functions.h"
 
-1579124071 source:d:\interpretator\interpretator\src\interpreter.cpp
+1579127851 source:d:\interpretator\interpretator\src\interpreter.cpp
 	"Interpreter.h"
 
-1574509611 source:d:\interpretator\interpretator\src\variables.cpp
+1579127246 source:d:\interpretator\interpretator\src\variables.cpp
 	"../include/Variables.h"
+
+1579124998 source:d:\interpretator\interpretator\src\bigint.cpp
+	<iostream>
+	<iomanip>
+	<vector>
+
+1579126782 d:\interpretator\interpretator\include\bigint.cpp
+	<iostream>
+	<iomanip>
+	<vector>
+
+1579126782 source:d:\interpretator\interpretator\include\bigint.cpp
+	<iostream>
+	<iomanip>
+	<vector>
 

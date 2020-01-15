@@ -8,7 +8,7 @@
 class BaseExpression
 {
     public:
-        virtual ulint evaluate() = 0;
+        virtual bigint evaluate() = 0;
 
     protected:
         std::string expr;
@@ -16,7 +16,7 @@ class BaseExpression
         bool isNumber(const char&);
         bool isOperation(const char&);
         int precedence(const char&);
-        ulint applyOp(const ulint&, const ulint&, const char&);
+        bigint applyOp(const bigint&, const bigint&, const char&);
 };
 
 #endif // BASEEXPRESSION_H

@@ -27,7 +27,7 @@ int BaseExpression::precedence(const char& op){
     return 0;
 }
 
-ulint BaseExpression::applyOp(const ulint& a, const ulint& b, const char& op){
+bigint BaseExpression::applyOp(const bigint& a, const bigint& b, const char& op){
     switch(op){
         case '+': return a + b;
         case '-': return a - b;

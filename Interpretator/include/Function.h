@@ -12,13 +12,13 @@ class Function : BaseExpression
 {
     public:
         Function(const std::string&, const std::vector<std::string>&);
-        ulint evaluate();
-        ulint call(const std::vector<ulint>&);
+        bigint evaluate();
+        bigint call(const std::vector<bigint>&);
 
     protected:
         unsigned paramsCount;
         Variables* paramsPtr;
-        std::map<std::string, ulint> vars;
+        std::map<std::string, bigint> vars;
         const std::string isValid(const std::string&);
 };
 

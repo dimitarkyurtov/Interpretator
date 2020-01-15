@@ -14,7 +14,7 @@ Interpreter* Interpreter::getInstance()
 }
 
 void Interpreter::persistParam(const std::string& param){
-    ulint value;
+    bigint value;
     std::cin >> value;
     paramsPtr->persist(param, value);
 }
@@ -56,7 +56,6 @@ void Interpreter::interpret(std::ifstream& file, std::ostream& stream = std::cou
     file.seekg(0, file.beg);
     while(std::getline (file,line)) {
         sizze = line.size();
-        std::cout << whileFlag << std::endl;
         std::cout << line << std::endl;
         line.erase(std::remove(line.begin(), line.end(), ' '), line.end());
         // Output the text from the file
@@ -325,6 +324,7 @@ void Interpreter::interpret(std::ifstream& file, std::ostream& stream = std::cou
                     col++;
                 }
             }
+
             Expression e = Expression(param);
             paramsPtr->persist(command, e.evaluate());
         }

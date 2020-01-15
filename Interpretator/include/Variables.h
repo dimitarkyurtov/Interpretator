@@ -1,6 +1,7 @@
 #ifndef VARIABLES_H
 #define VARIABLES_H
 
+#include "BigInt.cpp"
 #include <iostream>
 #include <unordered_map>
 #include <string>
@@ -11,10 +12,10 @@ class Variables
 {
     public:
         static Variables* getInstance();
-        ulint at(const std::string&);
-        bool persist(const std::string& , const ulint& );
+        bigint at(const std::string&);
+        bool persist(const std::string& , const bigint& );
         bool isPresent(const std::string&);
-        std::unordered_map<std::string, ulint> params;
+        std::unordered_map<std::string, bigint> params;
         bool isVariable(const std::string&);
         bool isCharacter(const char&);
 

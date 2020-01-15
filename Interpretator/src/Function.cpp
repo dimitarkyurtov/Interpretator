@@ -15,7 +15,7 @@ const std::string Function::isValid(const std::string&){
     return expr;
 }
 
-ulint Function::call(const std::vector<ulint>& vals){
+bigint Function::call(const std::vector<bigint>& vals){
     if(paramsCount == vals.size()){
         unsigned i = 0;
         for(auto x : vars){
@@ -25,16 +25,16 @@ ulint Function::call(const std::vector<ulint>& vals){
         return evaluate();
     } else {
             std::cerr << "Not enough arguments provided\n expected: " << paramsCount << "\n provided: " << vals.size() << std::endl;
-        return 0;
+        return bigint("0");
     }
 }
 
-ulint Function::evaluate(){
+bigint Function::evaluate(){
     std::stack<char> ops;
-    std::stack<ulint> nums;
+    std::stack<bigint> nums;
     unsigned i;
-    ulint a;
-    ulint b;
+    bigint a;
+    bigint b;
     unsigned size = expr.size();
     for(i = 0; i < size; i ++){
         if(expr[i] == '('){
@@ -42,15 +42,16 @@ ulint Function::evaluate(){
         }
 
         else if(isNumber(expr[i])){
-            ulint val = 0;
+            std::string val;
 
             while(i < size && isNumber(expr[i])){
 
-                val = (val*10) + (expr[i]-'0');
+                val += expr[i];
                 i++;
             }
 
-            nums.push(val);
+            bigint val2(val);
+            nums.push(val2);
             i--;
         }
 
@@ -85,17 +86,19 @@ ulint Function::evaluate(){
                 i++;
             }
             i++;
-            std::vector<ulint> vars;
+            std::vector<bigint> vars;
             while(expr[i] != ']'){
                 if(isNumber(expr[i])){
-                    ulint val = 0;
+                    std::string val;
 
                     while(i < size && isNumber(expr[i])){
 
-                        val = (val*10) + (expr[i]-'0');
+                        val += expr[i];
                         i++;
                     }
-                    vars.push_back(val);
+
+                    bigint val2(val);
+                    vars.push_back(val2);
                     i--;
                 }
                 i++;

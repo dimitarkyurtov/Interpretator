@@ -18,12 +18,12 @@ const std::string Expression::isValid(const std::string& expr){
     return err;
 }
 
-ulint Expression::evaluate(){
+bigint Expression::evaluate(){
     std::stack<char> ops;
-    std::stack<ulint> nums;
+    std::stack<bigint> nums;
     unsigned i;
-    ulint a;
-    ulint b;
+    bigint a;
+    bigint b;
     unsigned size = expr.size();
     for(i = 0; i < size; i ++){
         if(expr[i] == '('){
@@ -31,15 +31,16 @@ ulint Expression::evaluate(){
         }
 
         else if(isNumber(expr[i])){
-            ulint val = 0;
+            std::string val;
 
             while(i < size && isNumber(expr[i])){
 
-                val = (val*10) + (expr[i]-'0');
+                val += expr[i];
                 i++;
             }
 
-            nums.push(val);
+            bigint val2(val);
+            nums.push(val2);
             i--;
         }
 
@@ -70,7 +71,7 @@ ulint Expression::evaluate(){
                 i++;
             }
             i++;
-            std::vector<ulint> vars;
+            std::vector<bigint> vars;
             std::string word;
             while(expr[i] != ']'){
                 word = "";
@@ -86,14 +87,16 @@ ulint Expression::evaluate(){
                     }
                 }
                 if(isNumber(expr[i])){
-                    ulint val = 0;
+                    std::string val;
 
                     while(i < size && isNumber(expr[i])){
 
-                        val = (val*10) + (expr[i]-'0');
+                        val += expr[i];
                         i++;
                     }
-                    vars.push_back(val);
+
+                    bigint val2(val);
+                    vars.push_back(val2);
                     i--;
                 }
                 if(expr[i] != ']'){

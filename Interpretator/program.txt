@@ -4,7 +4,7 @@ while(a<5)[
  b = 0;
  while(b<2)[
   c = 8;
-  while(c<11)[
+  while(c<11& 1)[
    c=c+1;
    print(c);
   ]

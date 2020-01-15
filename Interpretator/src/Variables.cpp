@@ -29,7 +29,7 @@ bool Variables::isVariable(const std::string& var){
     return true;
 }
 
-bool Variables::persist(const std::string& var, const ulint& val){
+bool Variables::persist(const std::string& var, const bigint& val){
     if(isVariable(var)){
         params[var] = val;
         return true;
@@ -37,7 +37,7 @@ bool Variables::persist(const std::string& var, const ulint& val){
     return false;
 }
 
-ulint Variables::at(const std::string& var){
+bigint Variables::at(const std::string& var){
     if(isPresent(var)){
         return params[var];
     }
