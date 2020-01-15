@@ -38,6 +38,7 @@ void Interpreter::interpret(std::ifstream& file, std::ostream& stream = std::cou
     std::string funcName;
     unsigned j;
     unsigned row = 0;
+    unsigned ctr = 0;
     unsigned col;
     unsigned pos = 0;
     unsigned counter = 0;
@@ -47,6 +48,7 @@ void Interpreter::interpret(std::ifstream& file, std::ostream& stream = std::cou
     unsigned ifFlag = 1;
     unsigned elseFlag = 0;
     unsigned whileFlag = 0;
+    std::map<unsigned, int> map;
     while(std::getline (file,line)) {
         rows ++;
     }
@@ -54,8 +56,8 @@ void Interpreter::interpret(std::ifstream& file, std::ostream& stream = std::cou
     file.seekg(0, file.beg);
     while(std::getline (file,line)) {
         sizze = line.size();
-        std::cout << line << std::endl;
         std::cout << whileFlag << std::endl;
+        std::cout << line << std::endl;
         line.erase(std::remove(line.begin(), line.end(), ' '), line.end());
         // Output the text from the file
         row ++;
@@ -72,6 +74,7 @@ void Interpreter::interpret(std::ifstream& file, std::ostream& stream = std::cou
             }
             row ++;
             file.clear();
+            tellg = pos - sizze - 2;
             file.seekg(pos, file.beg);/*
             std::getline(file,line);
         std::cout << line << std::endl;
@@ -93,7 +96,6 @@ void Interpreter::interpret(std::ifstream& file, std::ostream& stream = std::cou
         }
 
         else if(line[col] == '>' && ifFlag > 0){
-            std::cout <<"ifflag: " << ifFlag << std::endl;
             ifFlag --;
             row ++;
             /*if(whileFlag == 0){
@@ -193,9 +195,6 @@ void Interpreter::interpret(std::ifstream& file, std::ostream& stream = std::cou
             while(line[col] == ' '){
                 col++;
             }
-            file.clear();
-            pos = tellg;
-            std::cout <<"Pos: " << pos << std::endl;
                 if(line[col] != '('){
                     std::cerr << "wrong syntax at " << row << " " << col+1 << ", expected ( !" << std::endl;
                 }
@@ -217,8 +216,15 @@ void Interpreter::interpret(std::ifstream& file, std::ostream& stream = std::cou
                 Expression e = Expression(param);
                 if(e.evaluate() == 0){
                     tellg += sizze +2;
-                    while(line[col] != ']'){
+                    ctr = 1;
+                    while(ctr != 0){
                             std::getline (file,line);
+                            if(line.find('[') <= line.size()){
+                                ctr ++;
+                            }
+                            if(line.find(']') <= line.size()){
+                                ctr --;
+                            }
                             sizze = line.size();
                             tellg += sizze +2;
                             row ++;
@@ -228,8 +234,15 @@ void Interpreter::interpret(std::ifstream& file, std::ostream& stream = std::cou
                             }
                         }
                     tellg -= sizze + 2;
+                    if(whileFlag > 0){
+                        pos = map[whileFlag-1];
                     }
+                }
                 else {
+                    file.clear();
+                    pos = tellg;
+                    std::cout <<"Pos: " << pos << std::endl;
+                    map.insert(std::pair<unsigned, int>(whileFlag, pos));
                     whileFlag ++;
                 }
         }
@@ -316,9 +329,9 @@ void Interpreter::interpret(std::ifstream& file, std::ostream& stream = std::cou
             paramsPtr->persist(command, e.evaluate());
         }
         }
-        if(whileFlag == 0){
+
             tellg += sizze + 2;
-        }
+
     }
     file.close();
 }
